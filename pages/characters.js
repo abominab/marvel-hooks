@@ -26,7 +26,7 @@ const MarvelPage = ({ initProps }) => {
 
     // detailRef.current ? detailRef.current.scrollIntoView(true) : console.warn(`no detailRef`);
 
-    window.scrollTo({ top: 296, behavior: `smooth` });
+    window.scrollTo({ top: 370, behavior: `smooth` });
   }, [character]);
 
   const handleSubmit = async event => {

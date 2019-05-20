@@ -19,13 +19,17 @@ const MenuBar = () => {
         </a>
       </div>
       <ul>
-        {menuOptions.map(option => (
-          <li>
-            <Link href={`/${option.toLowerCase()}`}>
-              <a>{option}</a>
-            </Link>
-          </li>
-        ))}
+        {menuOptions.map(option => {
+          const lower = option.toLowerCase();
+
+          return (
+            <li key={lower}>
+              <Link href={`/${lower}`}>
+                <a>{option}</a>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
 
       <style jsx>{`
