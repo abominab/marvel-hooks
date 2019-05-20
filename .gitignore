@@ -1,0 +1,11 @@
+node_modules/
+.next/
+storybook-static/
+.env
+logs
+*.log
+.npm
+.idea/
+.vscode/
+.cache/
+.history/
