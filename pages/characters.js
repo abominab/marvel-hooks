@@ -3,8 +3,10 @@ import CharacterDetail, {
   CharacterBio,
   CharacterImg,
   CharacterLinks,
-  CharacterSeries
+  CharacterSeries,
+  CharacterEvents
 } from "../components/CharacterDetail";
+import { logInitProps } from "../utils/log";
 import MarvelService from "../services/marvelService";
 
 const MarvelPage = ({ initProps }) => {
@@ -26,7 +28,7 @@ const MarvelPage = ({ initProps }) => {
 
     // detailRef.current ? detailRef.current.scrollIntoView(true) : console.warn(`no detailRef`);
 
-    window.scrollTo({ top: 370, behavior: `smooth` });
+    window.scrollTo({ top: 445, behavior: `smooth` });
   }, [character]);
 
   const handleSubmit = async event => {
@@ -45,6 +47,10 @@ const MarvelPage = ({ initProps }) => {
       <p>
         The input can be pre-populated with the <code>search</code> query param.
       </p>
+      {/* prettier-ignore */}
+      <p>
+        The <code>CharacterDetail</code> component is an example of composability and the <code>useContext</code> hook.
+      </p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -55,12 +61,15 @@ const MarvelPage = ({ initProps }) => {
         <button onClick={handleSubmit}>Search</button>
       </form>
       {character && (
-        <CharacterDetail char={character} ref={detailRef}>
-          <CharacterBio />
-          {!initProps.query.nopics && <CharacterImg />}
-          <CharacterLinks />
-          <CharacterSeries />
-        </CharacterDetail>
+        <div ref={detailRef}>
+          <CharacterDetail char={character}>
+            <CharacterBio />
+            {!initProps.query.nopics && <CharacterImg />}
+            <CharacterLinks />
+            <CharacterSeries />
+            <CharacterEvents ordered />
+          </CharacterDetail>
+        </div>
       )}
       {characters && (
         <div>
@@ -88,10 +97,10 @@ const MarvelPage = ({ initProps }) => {
 };
 
 MarvelPage.getInitialProps = async ({ query }) => {
-  // TODO: pull from local storage?
   let initProps = { query };
-  process.env.LOG_INIT_PROPS &&
-    console.log(`characters.js | getInitialProps:`, initProps);
+
+  logInitProps(`characters.js`, initProps);
+
   return { initProps };
 };
 

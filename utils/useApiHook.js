@@ -2,6 +2,7 @@
 const { useEffect, useState } = require("react");
 import MarvelService from "../services/marvelService";
 
+// I know this is a sloppy way to interact w/ the API, it is just an example. Until I come up w/ a better use case or pattern, I'll leave it here.
 function useApi(apiMethod, ...args) {
   const [results, setResults] = useState(null);
   const [attempted, setAttempted] = useState(false);

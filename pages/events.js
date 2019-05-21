@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useApi } from "../utils/useApiHook";
+import { logInitProps } from "../utils/log";
 
 const Events = ({ initProps }) => {
   const { results, attempted = false } = useApi(
@@ -60,8 +61,9 @@ const Events = ({ initProps }) => {
 
 Events.getInitialProps = ({ query }) => {
   let initProps = { query };
-  process.env.LOG_INIT_PROPS &&
-    console.log(`events.js | getInitialProps:`, initProps);
+
+  logInitProps(`events.js`, initProps);
+
   return { initProps };
 };
 

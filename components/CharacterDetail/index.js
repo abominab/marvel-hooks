@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import Link from "next/link";
 
 export const OldWay = ({ char, noPics }) => (
   <div>
@@ -85,6 +86,7 @@ export const CharacterLinks = () => {
       <h4>Links:</h4>
       <ul>
         {char.urls.map(({ url }, index) => {
+          //remove api key from the url
           let cleanUrl = url && url.substring(0, url.indexOf("?"));
 
           return (
@@ -94,6 +96,37 @@ export const CharacterLinks = () => {
           );
         })}
       </ul>
+    </div>
+  );
+};
+
+export const CharacterEvents = ({ ordered }) => {
+  const { char } = useContext(CharacterDetailContext);
+
+  const buildListItems = items => (
+    <>
+      {items.map(item => {
+        const eventId = item.resourceURI.match(/\/([0-9]+)/)[1];
+
+        return (
+          <Link href={`/events?eventId=${eventId}`} key={item.resourceURI}>
+            <a>
+              <li>{item.name}</li>
+            </a>
+          </Link>
+        );
+      })}
+    </>
+  );
+
+  return (
+    <div>
+      <h4>Events:</h4>
+      {ordered ? (
+        <ol>{buildListItems(char.events.items)}</ol>
+      ) : (
+        <ul>{buildListItems(char.events.items)}</ul>
+      )}
     </div>
   );
 };

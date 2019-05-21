@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { logInitProps } from "../utils/log";
 import MarvelService from "../services/marvelService";
 
 function Comics({ initProps }) {
@@ -57,8 +58,8 @@ Comics.getInitialProps = async ({ query }) => {
   // const comics = await MarvelService.getComicList(query.seed || randomLetter);
 
   let initProps = { query, randomLetter };
-  process.env.LOG_INIT_PROPS &&
-    console.log(`comics.js | getInitialProps:`, initProps);
+
+  logInitProps(`comics.js`, initProps);
 
   return { initProps };
 };

@@ -1,4 +1,5 @@
 import fetch from "isomorphic-unfetch";
+import { logApi } from "../utils/log";
 
 class MarvelService {
   constructor() {
@@ -6,15 +7,12 @@ class MarvelService {
     this.apikey = `apikey=${process.env.MARVEL_API_KEY}`;
   }
 
-  logMsg = (msg, ...rest) =>
-    process.env.LOG_API && console.log(`marvelService.js | ${msg}`, ...rest);
-
   apiFetch = async url => {
     if (!url.includes("?")) {
       // add a question mark to the rul if there isn't one so that we can add apikey w/ an ampersand every time
       url = `${url}?`;
     }
-    this.logMsg(`Fetching`, url);
+    logApi(`Fetching`, url);
 
     const {
       data: { results }
@@ -27,7 +25,7 @@ class MarvelService {
         return { data: { results: [] } };
       });
 
-    this.logMsg(`Results:`, results);
+    logApi(`Results:`, results);
 
     return results;
   };

@@ -1,3 +1,5 @@
+import { logInitProps } from "../utils/log";
+
 const Log = ({ initProps }) => {
   return (
     <div>
@@ -15,8 +17,9 @@ const Log = ({ initProps }) => {
 
 Log.getInitialProps = ({ query }) => {
   let initProps = { query };
-  process.env.LOG_INIT_PROPS &&
-    console.log(`guestlog.js | getInitialProps:`, initProps);
+
+  logInitProps(`guestlog.js`, initProps);
+
   return { initProps };
 };
 
