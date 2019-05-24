@@ -85,16 +85,11 @@ export const HeroLinks = () => {
     <div>
       <h4>Links:</h4>
       <ul>
-        {hero.urls.map(({ url }, index) => {
-          //remove api key from the url
-          let cleanUrl = url && url.substring(0, url.indexOf("?"));
-
-          return (
-            <li key={`${cleanUrl}-${index}`}>
-              <a href={cleanUrl}>{cleanUrl}</a>
-            </li>
-          );
-        })}
+        {hero.urls.map(({ url }, index) => (
+          <li key={`${url}-${index}`}>
+            <a href={url}>{url}</a>
+          </li>
+        ))}
       </ul>
     </div>
   );

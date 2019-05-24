@@ -41,11 +41,17 @@ class MyApp extends App {
             text-transform: uppercase;
           }
 
+          footer {
+            position: absolute;
+            bottom: 0;
+          }
+
           hr {
             color: var(--marvel-red);
             border-color: var(--marvel-red);
           }
         `}</style>
+        <footer>"Data provided by Marvel. © 2014 Marvel"</footer>
       </Container>
     );
   }
