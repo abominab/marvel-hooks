@@ -1,19 +1,19 @@
 import { createContext, useContext } from "react";
 import Link from "next/link";
 
-export const OldWay = ({ char, noPics }) => (
+export const OldWay = ({ hero, noPics }) => (
   <div>
     <h2>Detail:</h2>
     {!noPics && (
-      <img src={`${char.thumbnail.path}.${char.thumbnail.extension}`} />
+      <img src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />
     )}
     <div>
-      <h3>{char.name}</h3>
-      <p>{char.description}</p>
+      <h3>{hero.name}</h3>
+      <p>{hero.description}</p>
       <div>
         <h4>Series:</h4>
         <ul>
-          {char.series.items.map(item => (
+          {hero.series.items.map(item => (
             <li key={item.resourceURI}>{item.name}</li>
           ))}
         </ul>
@@ -21,7 +21,7 @@ export const OldWay = ({ char, noPics }) => (
       <div>
         <h4>Links:</h4>
         <ul>
-          {char.urls.map(({ url }, index) => {
+          {hero.urls.map(({ url }, index) => {
             let cleanUrl = url && url.substring(0, url.indexOf("?"));
 
             return (
@@ -38,39 +38,39 @@ export const OldWay = ({ char, noPics }) => (
   </div>
 );
 
-const CharacterDetailContext = createContext();
+const HeroDetailContext = createContext();
 
-const CharacterDetail = ({ char, children }) => (
-  <CharacterDetailContext.Provider value={{ char }}>
+const HeroDetail = ({ hero, children }) => (
+  <HeroDetailContext.Provider value={{ hero }}>
     {children}
-  </CharacterDetailContext.Provider>
+  </HeroDetailContext.Provider>
 );
 
-export const CharacterImg = () => {
-  const { char } = useContext(CharacterDetailContext);
+export const HeroImg = () => {
+  const { hero } = useContext(HeroDetailContext);
 
-  return <img src={`${char.thumbnail.path}.${char.thumbnail.extension}`} />;
+  return <img src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} />;
 };
 
-export const CharacterBio = () => {
-  const { char } = useContext(CharacterDetailContext);
+export const HeroBio = () => {
+  const { hero } = useContext(HeroDetailContext);
 
   return (
     <div>
-      <h2>{char.name}</h2>
-      <p>{char.description}</p>
+      <h2>{hero.name}</h2>
+      <p>{hero.description}</p>
     </div>
   );
 };
 
-export const CharacterSeries = () => {
-  const { char } = useContext(CharacterDetailContext);
+export const HeroSeries = () => {
+  const { hero } = useContext(HeroDetailContext);
 
   return (
     <div>
       <h4>Series:</h4>
       <ul>
-        {char.series.items.map(item => (
+        {hero.series.items.map(item => (
           <li key={item.resourceURI}>{item.name}</li>
         ))}
       </ul>
@@ -78,14 +78,14 @@ export const CharacterSeries = () => {
   );
 };
 
-export const CharacterLinks = () => {
-  const { char } = useContext(CharacterDetailContext);
+export const HeroLinks = () => {
+  const { hero } = useContext(HeroDetailContext);
 
   return (
     <div>
       <h4>Links:</h4>
       <ul>
-        {char.urls.map(({ url }, index) => {
+        {hero.urls.map(({ url }, index) => {
           //remove api key from the url
           let cleanUrl = url && url.substring(0, url.indexOf("?"));
 
@@ -100,8 +100,8 @@ export const CharacterLinks = () => {
   );
 };
 
-export const CharacterEvents = ({ ordered }) => {
-  const { char } = useContext(CharacterDetailContext);
+export const HeroEvents = ({ ordered }) => {
+  const { hero } = useContext(HeroDetailContext);
 
   const buildListItems = items => (
     <>
@@ -123,12 +123,12 @@ export const CharacterEvents = ({ ordered }) => {
     <div>
       <h4>Events:</h4>
       {ordered ? (
-        <ol>{buildListItems(char.events.items)}</ol>
+        <ol>{buildListItems(hero.events.items)}</ol>
       ) : (
-        <ul>{buildListItems(char.events.items)}</ul>
+        <ul>{buildListItems(hero.events.items)}</ul>
       )}
     </div>
   );
 };
 
-export default CharacterDetail;
+export default HeroDetail;

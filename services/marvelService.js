@@ -30,6 +30,7 @@ class MarvelService {
     return results;
   };
 
+  // List of available calls: https://developer.marvel.com/docs
   getCharacterList = query =>
     this.apiFetch(`${this.baseUrl}/characters?nameStartsWith=${query}`);
 
@@ -43,6 +44,21 @@ class MarvelService {
     this.apiFetch(`${this.baseUrl}/events?nameStartsWith=${query}`);
 
   getEvent = eventId => this.apiFetch(`${this.baseUrl}/events/${eventId}`);
+
+  getSeriesList = query =>
+    this.apiFetch(`${this.baseUrl}/series?titleStartsWith=${query}`);
+
+  getStoriesList = search => {
+    const { comics, series, events, creators, characters } = search;
+
+    let url = `${this.baseUrl}/stories?${!!comics ? `comics=${comics}` : ""}${
+      !!series ? `&series=${series}` : ""
+    }${!!events ? `&events=${events}` : ""}${
+      !!creators ? `&creators=${creators}` : ""
+    }${!!characters ? `&characters=${characters}` : ""}`;
+
+    return this.apiFetch(url);
+  };
 }
 
 export default new MarvelService();

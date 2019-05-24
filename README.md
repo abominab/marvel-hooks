@@ -8,9 +8,9 @@
 
 - To run this locally you'll need to run `npm i` and then `npm run dev`.
 - You'll also **need to add a `.env` file** with the following variables:
-  - LOG_API:boolean
-  - LOG_INIT_PROPS:boolean
-  - MARVEL_API_KEY:string (Get this from https://developer.marvel.com/signup)
+  - LOG_API: true | false
+  - LOG_INIT_PROPS: true | false
+  - MARVEL_API_KEY: (Get this from https://developer.marvel.com/signup)
 
 ### Things I want to do in the app
 

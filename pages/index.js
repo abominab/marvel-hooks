@@ -1,6 +1,5 @@
 function Home() {
-  process.browser && console.log(`env MAGIC_NUMBER`, process.env.MAGIC_NUMBER);
-
+  
   return (
     <div>
       <p>

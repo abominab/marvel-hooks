@@ -8,8 +8,7 @@ function Comics({ initProps }) {
     initProps.query.seed || initProps.randomLetter
   );
 
-  const getComics = async searchQuery => {
-    // MarvelService.getComicList(search).then(comics => setComics(comics));
+  const getComics = searchQuery => {
     let isCurrent = true;
     (async () => {
       MarvelService.getComicList(search).then(comics => {
