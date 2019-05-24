@@ -41,9 +41,13 @@ class MyApp extends App {
             text-transform: uppercase;
           }
 
+          {/* FIXME: Needs style tweeks, often ends up in middle of page */}
           footer {
-            position: absolute;
+            background-color: white;
             bottom: 0;
+            color: var(--marvel-red);
+            right: 0;
+            position: fixed;
           }
 
           hr {
