@@ -55,7 +55,7 @@ class MyApp extends App {
             border-color: var(--marvel-red);
           }
         `}</style>
-        <footer>"Data provided by Marvel. © 2014 Marvel"</footer>
+        <footer>Data provided by Marvel. © 2014 Marvel</footer>
       </Container>
     );
   }
