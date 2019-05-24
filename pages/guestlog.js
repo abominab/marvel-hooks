@@ -1,15 +1,23 @@
+import { useEffect, useState } from "react";
 import { logInitProps } from "../utils/log";
 
 const Log = ({ initProps }) => {
-  // const [msg, setMsg] = useState("");
-  // const [name, setName] = useState("");
+  const [name, setName] = useState(initProps.query.name || null);
+  const [msg, setMsg] = useState(null);
+  const [msgs, setMsgs] = useState([]);
 
-  /**
-   * LOOKATME:
-   * Live Coding example.
-   * Make comments show up by saving them to an array in state
-   * Plug for local storage
-   */
+  useEffect(() => {
+    if (msgs.length > 0) {
+      document.title = `${msgs[msgs.length - 1].name} added a comment`;
+    }
+  }, [msgs]);
+
+  const handleSubmit = async newMsg => {
+    event.preventDefault();
+    setMsgs([...msgs, newMsg]);
+    setMsg("");
+    setName("");
+  };
 
   return (
     <div>
@@ -20,26 +28,51 @@ const Log = ({ initProps }) => {
       </p>
       <h2>Leave a message</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="formItem">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
+            name="name"
             value={name}
             onChange={e => setName(e.target.value)}
-            name="name"
           />
         </div>
-        <div>
+        <div className="formItem">
           <label htmlFor="msg">Message:</label>
-          <input
-            type="text"
+          <textarea
+            name="msg"
+            rows="5"
             value={msg}
             onChange={e => setMsg(e.target.value)}
-            name="msg"
           />
         </div>
-        <button onClick={handleSubmit}>Submit</button>
+        <button onClick={() => handleSubmit({ msg, name })}>Submit</button>
       </form>
+
+      {msgs &&
+        msgs.map(msg => (
+          <div>
+            <p>{msg.name}</p>
+            <p>{msg.msg}</p>
+          </div>
+        ))}
+
+      <style jsx>{`
+        form .formItem {
+          display: flex;
+          margin: 10px 20px;
+        }
+
+        form .formItem * {
+          flex-basis: 40%;
+        }
+
+        form .formItem label {
+          margin: 0 8px;
+          text-align: right;
+          flex-basis: 5%;
+        }
+      `}</style>
     </div>
   );
 };

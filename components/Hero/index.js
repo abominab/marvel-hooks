@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import Link from "next/link";
 
-export const OldWay = ({ hero, noPics }) => (
+export const OldWay = ({ hero, noPics, noLinks }) => (
   <div>
     <h2>Detail:</h2>
     {!noPics && (
@@ -18,22 +18,24 @@ export const OldWay = ({ hero, noPics }) => (
           ))}
         </ul>
       </div>
-      <div>
-        <h4>Links:</h4>
-        <ul>
-          {hero.urls.map(({ url }, index) => {
-            let cleanUrl = url && url.substring(0, url.indexOf("?"));
+      {!noLinks && (
+        <div>
+          <h4>Links:</h4>
+          <ul>
+            {hero.urls.map(({ url }, index) => {
+              let cleanUrl = url && url.substring(0, url.indexOf("?"));
 
-            return (
-              <li key={`${cleanUrl}-${index}`}>
-                <a href={cleanUrl} target="_blank">
-                  {cleanUrl}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+              return (
+                <li key={`${cleanUrl}-${index}`}>
+                  <a href={cleanUrl} target="_blank">
+                    {cleanUrl}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   </div>
 );

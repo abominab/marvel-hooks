@@ -68,16 +68,13 @@ const MarvelPage = ({ initProps }) => {
       {characters && !characters.length && <p>No matching characters 😢</p>}
       {character && (
         <div ref={detailRef}>
-          {/* <HeroDetail hero={character}>
+          <HeroDetail hero={character}>
             <HeroBio />
             {!initProps.query.nopics && <HeroImg />}
             <HeroLinks />
             <HeroSeries />
             <HeroEvents ordered />
-          </HeroDetail> */}
-
-          {/* LOOKATME: live coding  noPics={true} */}
-          <OldWay hero={character} />
+          </HeroDetail>
         </div>
       )}
       {characters && (
